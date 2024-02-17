@@ -1,8 +1,5 @@
 import React, { useState } from "react";
 
-import { LoginScreen } from "./LoginScreen";
-import { SignUpScreen } from "./SignUpScreen";
-
 import { Header } from './Header.jsx'
 import { Navbar } from './Navbar.jsx'
 import { Content } from './Content.jsx'
