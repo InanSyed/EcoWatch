@@ -12,7 +12,6 @@ function Login() {
 
     return (
         <>
-            <h1>ECOWatch</h1>
             {showSignUp ? (
                 <SignUpScreen onCloseSignUp={handleToggleSignUp} />
             ) : (

@@ -9,7 +9,7 @@ const App = () => {
 
   return (
     <div className="h-screen flex align-center flex-col">
-      <Header />
+      <Header changePage={changePage} />
       <Content page={ page } />
       <Navbar />
     </div>
