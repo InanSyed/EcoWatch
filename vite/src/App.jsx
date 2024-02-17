@@ -1,22 +1,22 @@
 import React, { useState } from "react";
-import LoginScreen from "./LoginScreen";
-import SignUpScreen from "./SignUpScreen";
+
+import { Header } from './Header.jsx'
+import { Navbar } from './Navbar.jsx'
+import { Content } from './Content.jsx'
 
 const App = () => {
-  const [showSignUp, setShowSignUp] = useState(false);
+  const [page, changePage] = useState("empty");
 
-  const handleToggleSignUp = () => {
-    setShowSignUp(!showSignUp);
-  };
+  function c() {
+    changePage("login")
+  }
+
 
   return (
-    <div>
-      <h1>ECOWatch</h1>
-      {showSignUp ? (
-        <SignUpScreen onCloseSignUp={handleToggleSignUp} />
-      ) : (
-        <LoginScreen onToggleSignUp={handleToggleSignUp} />
-      )}
+    <div className="h-screen flex align-center flex-col">
+      <Header />
+      <Content page={ page } />
+      <Navbar />
     </div>
   );
 }
