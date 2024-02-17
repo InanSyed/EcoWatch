@@ -1,5 +1,7 @@
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
+
+
 const firebaseConfig = {
   apiKey: "AIzaSyBIToEBBXpngnJymATRKTx5BX7MdnvdXtk",
   authDomain: "ecowatch-c3a72.firebaseapp.com",
@@ -14,7 +16,7 @@ const analytics = getAnalytics(app);
 import React, { useState } from "react";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 
-const SignUpScreen = ({ onCloseSignUp }) => {
+export const SignUpScreen = ({ onCloseSignUp }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [signUpSuccess, setSignUpSuccess] = useState(false);
@@ -38,42 +40,46 @@ const SignUpScreen = ({ onCloseSignUp }) => {
           {/* Additional content or actions after successful sign-up */}
         </div>
       ) : (
-        <div>
-          <h2>Sign Up</h2>
+        <div className="m-5 flex place-items-center flex-col">
+          <h1 className="text-6xl m-2 mb-10 content-center">Sign Up</h1>
           <form>
-            <label>
-              Email:
+            <label className="m-2 flex place-items-center flex-col text-2xl content-center text-emerald-600">
+              Email
               <input
+                className="mt-2 rounded-lg bg-transparent border-2"
                 type="email"
+                defaultValue="example@domain.com"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />
             </label>
-            <br />
-            <label>
-              Password:
+            <label className="my-6 flex place-items-center flex-col text-2xl content-center text-emerald-600">
+              Password
               <input
+                className="mt-2 rounded-lg bg-transparent border-2"
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
             </label>
-            <br />
-            <button type="button" onClick={handleSignUp}>
-              Sign Up
-            </button>
-            <br />
-            <span>
-              Already have an account?{" "}
-              <button type="button" onClick={onCloseSignUp}>
-                Login
+            <div className="flex flex-col place-items-center">
+              <button
+                type="button"
+                className='bg-green-950 font-bold text-center text-lg py-2 px-5 rounded-lg border-2 border-green-700'
+                onClick={handleSignUp}
+              >
+                Sign Up
               </button>
-            </span>
+              <span>
+                Already have an account?{" "}
+                <button type="button" onClick={onCloseSignUp}>
+                  <u>Login</u>
+                </button>
+              </span>
+            </div>
           </form>
         </div>
       )}
     </div>
   );
 };
-
-export default SignUpScreen;

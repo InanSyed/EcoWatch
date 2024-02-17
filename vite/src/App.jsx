@@ -1,6 +1,8 @@
 import React, { useState } from "react";
-import LoginScreen from "./LoginScreen";
-import SignUpScreen from "./SignUpScreen";
+import { LoginScreen } from "./LoginScreen";
+import { SignUpScreen } from "./SignUpScreen";
+
+import { Header } from "./Header.jsx";
 
 const App = () => {
   const [showSignUp, setShowSignUp] = useState(false);
@@ -10,14 +12,16 @@ const App = () => {
   };
 
   return (
-    <div>
-      <h1>ECOWatch</h1>
-      {showSignUp ? (
-        <SignUpScreen onCloseSignUp={handleToggleSignUp} />
-      ) : (
-        <LoginScreen onToggleSignUp={handleToggleSignUp} />
-      )}
-    </div>
+    <>
+      <Header></Header>
+      <div>
+        {showSignUp ? (
+          <SignUpScreen onCloseSignUp={handleToggleSignUp} />
+        ) : (
+          <LoginScreen onToggleSignUp={handleToggleSignUp} />
+        )}
+      </div>
+    </>
   );
 }
 
