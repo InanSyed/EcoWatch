@@ -14,7 +14,7 @@ function Icon({icon}) {
 
 export const Navbar = () => {
     return (
-        <nav className="flex flex-1 h-14 w-screen bg-blue">
+        <nav className="flex flex-5 h-14 w-screen bg-blue">
             <Icon icon={newspaperOutline}/>
             <Icon icon={homeOutline}/>
             <Icon icon={calendarClearOutline}/>
