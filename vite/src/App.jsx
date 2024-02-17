@@ -10,9 +10,7 @@ function App() {
 
   return (
     <>
-      <Navbar>
-        
-      </Navbar>
+      <Navbar className='flex-1' />
     </>
   )
 }
