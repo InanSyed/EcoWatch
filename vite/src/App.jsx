@@ -7,11 +7,6 @@ import { Content } from './Content.jsx'
 const App = () => {
   const [page, changePage] = useState("empty");
 
-  function c() {
-    changePage("login")
-  }
-
-
   return (
     <div className="h-screen flex align-center flex-col">
       <Header />

@@ -1,3 +1,6 @@
+import React, { useState } from "react";
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 
@@ -12,8 +15,7 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);import React, { useState } from "react";
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+const analytics = getAnalytics(app);
 
 export const LoginScreen = ({ onToggleSignUp }) => {
   const [email, setEmail] = useState("");
@@ -30,32 +32,38 @@ export const LoginScreen = ({ onToggleSignUp }) => {
   };
 
   return (
-    <div>
-      <h2>Login</h2>
+    <div className="m-5 flex place-items-center flex-col">
+      <h1 className="text-6xl m-2 mb-10 content-center">Login</h1>
       <form>
-        <label>
-          Email:
+        <label className="m-2 flex place-items-center flex-col text-2xl content-center text-emerald-600">
+          Email
           <input
+            className="mt-2 rounded-lg bg-transparent border-2"
             type="email"
+            defaultValue="example@domain.com"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
         </label>
-        <br />
-        <label>
-          Password:
+        <label className="my-6 flex place-items-center flex-col text-2xl content-center text-emerald-600">
+          Password
           <input
+            className="mt-2 rounded-lg bg-transparent border-2"
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
         </label>
-        <br />
-        <button type="button" onClick={handleLogin}>
-          Login
-        </button>
-        <br />
-        <span>Don't have an account? <button type="button" onClick={onToggleSignUp}>Sign Up</button></span>
+        <div className="flex flex-col place-items-center">
+          <button
+            type="button"
+            className='bg-green-950 font-bold text-center text-lg py-2 px-5 rounded-lg border-2 border-green-700'
+            onClick={handleLogin}
+          >
+            Login
+          </button>
+          <span>Don't have an account? <button type="button" onClick={onToggleSignUp}><u>Sign Up</u></button></span>
+        </div>
       </form>
     </div>
   );

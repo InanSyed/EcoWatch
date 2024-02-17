@@ -3,7 +3,6 @@ import ecoWatch from './assets/EcoWatch LOGO.png'
 import ecoWatchNoTree from './assets/EcoWatch LOGO No Tree.png'
 
 export const Header = () => {
-    const [count, setCount] = useState(0)
 
     return (
         <>
