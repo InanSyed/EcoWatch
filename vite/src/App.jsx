@@ -1,25 +1,19 @@
-// App.js
 import React, { useState } from "react";
 import LoginScreen from "./LoginScreen";
 import SignUpScreen from "./SignUpScreen";
 
-const App = () => {
-  const [showSignUp, setShowSignUp] = useState(false);
+import { Navbar } from './Navbar.jsx'
+import { Header } from './Header.jsx'
 
-  const handleToggleSignUp = () => {
-    setShowSignUp(!showSignUp);
-  };
+function App() {
+  const [count, setCount] = useState(0)
 
   return (
-    <div>
-      <h1>ECOWatch</h1>
-      {showSignUp ? (
-        <SignUpScreen onCloseSignUp={handleToggleSignUp} />
-      ) : (
-        <LoginScreen onToggleSignUp={handleToggleSignUp} />
-      )}
-    </div>
-  );
-};
+    <>
+      <Header />
+      <Navbar className='flex-1' />
+    </>
+  )
+}
 
 export default App;
