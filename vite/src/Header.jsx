@@ -1,13 +1,12 @@
 import { useState } from 'react'
 import ecoWatch from './assets/EcoWatch LOGO.png'
 import ecoWatchNoTree from './assets/EcoWatch LOGO No Tree.png'
-import './App.css'
 
 export const Header = () => {
 
     return (
         <>
-            <div className='flex border-b-2'>
+            <div className='flex flex-5 border-b-2'>
                 <div className='flex-1 grow'>
                     <img className='aspect-auto max-h-20' src={ecoWatchNoTree}></img>
                     {/* <h1 className=''><span className='text-emerald-600'>ECO</span>Watch</h1> */}

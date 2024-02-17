@@ -1,27 +1,21 @@
 import React, { useState } from "react";
+
 import { LoginScreen } from "./LoginScreen";
 import { SignUpScreen } from "./SignUpScreen";
 
-import { Header } from "./Header.jsx";
+import { Header } from './Header.jsx'
+import { Navbar } from './Navbar.jsx'
+import { Content } from './Content.jsx'
 
 const App = () => {
-  const [showSignUp, setShowSignUp] = useState(false);
-
-  const handleToggleSignUp = () => {
-    setShowSignUp(!showSignUp);
-  };
+  const [page, changePage] = useState("empty");
 
   return (
-    <>
-      <Header></Header>
-      <div>
-        {showSignUp ? (
-          <SignUpScreen onCloseSignUp={handleToggleSignUp} />
-        ) : (
-          <LoginScreen onToggleSignUp={handleToggleSignUp} />
-        )}
-      </div>
-    </>
+    <div className="h-screen flex align-center flex-col">
+      <Header />
+      <Content page={ page } />
+      <Navbar />
+    </div>
   );
 }
 
