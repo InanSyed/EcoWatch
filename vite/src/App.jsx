@@ -11,9 +11,8 @@ function App() {
 
   return (
     <>
-      <Header>
-        
-      </Header>
+      <Header />
+      <Navbar className='flex-1' />
     </>
   )
 }
