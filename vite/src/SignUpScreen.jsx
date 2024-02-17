@@ -14,7 +14,7 @@ const analytics = getAnalytics(app);
 import React, { useState } from "react";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 
-const SignUpScreen = ({ onCloseSignUp }) => {
+export const SignUpScreen = ({ onCloseSignUp }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [signUpSuccess, setSignUpSuccess] = useState(false);
@@ -75,5 +75,3 @@ const SignUpScreen = ({ onCloseSignUp }) => {
     </div>
   );
 };
-
-export default SignUpScreen;

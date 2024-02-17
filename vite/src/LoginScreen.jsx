@@ -15,7 +15,7 @@ const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);import React, { useState } from "react";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 
-const LoginScreen = ({ onToggleSignUp }) => {
+export const LoginScreen = ({ onToggleSignUp }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -60,5 +60,3 @@ const LoginScreen = ({ onToggleSignUp }) => {
     </div>
   );
 };
-
-export default LoginScreen;
