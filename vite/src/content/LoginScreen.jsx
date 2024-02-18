@@ -8,16 +8,7 @@ import { getAnalytics } from "firebase/analytics";
 
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-const firebaseConfig = {
-  apiKey: "AIzaSyBIToEBBXpngnJymATRKTx5BX7MdnvdXtk",
-  authDomain: "ecowatch-c3a72.firebaseapp.com",
-  databaseURL: "https://ecowatch-c3a72-default-rtdb.firebaseio.com",
-  projectId: "ecowatch-c3a72",
-  storageBucket: "ecowatch-c3a72.appspot.com",
-  messagingSenderId: "361212644337",
-  appId: "1:361212644337:web:a79a5546f7ed8edfb95250",
-  measurementId: "G-WBY6W9Y0F7"
-};
+import firebaseConfig from "../../firebase.config.json";
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
