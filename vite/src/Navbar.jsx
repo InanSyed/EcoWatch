@@ -1,26 +1,24 @@
 import { IonIcon } from "@ionic/react"
-import { homeOutline, calendarClearOutline, newspaperOutline } from 'ionicons/icons'
+import { homeOutline, calendarClearOutline, newspaperOutline, searchOutline, personCircleOutline } from 'ionicons/icons'
 
-function Icon({icon}) {
+function Icon({ icon }) {
     return (
         <div className="flex-1 flex place-center">
-                <IonIcon
-                    className="flex-1 h-10 p-2"
-                    icon={icon}
-                />
-            </div>
+            <IonIcon
+                className="flex-1 h-10 p-2"
+                icon={icon}
+            />
+        </div>
     )
 }
 
 export const Navbar = () => {
     return (
         <nav className="flex flex-5 h-14 w-screen bg-blue">
-            <Icon icon={newspaperOutline}/>
-            <Icon icon={search-outline}/>
-            <Icon icon={homeOutline}/>
-            <Icon icon={calendarClearOutline}/>
-            <Icon icon={walk-outline}/>
-
+            <Icon icon={newspaperOutline} />
+            <Icon icon={searchOutline} />
+            <Icon icon={homeOutline} />
+            <Icon icon={calendarClearOutline} />
         </nav>
     )
 }

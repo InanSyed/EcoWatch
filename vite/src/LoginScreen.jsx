@@ -23,22 +23,22 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
 
-export const LoginScreen = ({ onToggleSignUp }) => {
+export const LoginScreen = ({ onToggleSignUp, setLoggedIn }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [loggedin, setloggedin] = useState(false);
 
+  
   const handleLogin = async () => {
     try {
       const auth = getAuth();
       await signInWithEmailAndPassword(auth, email, password);
-      setloggedin(true);
+      setLoggedIn(true);
       console.log("User logged in successfully");
     } catch (error) {
       console.error("Error logging in:", error.message);
     }
   };
-
+  
   return (
     <div className="m-5 flex place-items-center flex-col">
       <h1 className="text-6xl m-2 mb-10 content-center">Login</h1>
@@ -53,10 +53,10 @@ export const LoginScreen = ({ onToggleSignUp }) => {
             onChange={(e) => setEmail(e.target.value)}
           />
         </label>
-        <label className="p-2 my-6 flex place-items-center flex-col text-2xl content-center text-emerald-600">
+        <label className="my-6 flex place-items-center flex-col text-2xl content-center text-emerald-600">
           Password
           <input
-            className="mt-2 rounded-lg bg-transparent border-2"
+            className="p-2 mt-2 rounded-lg bg-transparent border-2"
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
