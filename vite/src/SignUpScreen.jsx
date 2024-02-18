@@ -1,16 +1,23 @@
+// Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
 
-
+// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
   apiKey: "AIzaSyBIToEBBXpngnJymATRKTx5BX7MdnvdXtk",
   authDomain: "ecowatch-c3a72.firebaseapp.com",
+  databaseURL: "https://ecowatch-c3a72-default-rtdb.firebaseio.com",
   projectId: "ecowatch-c3a72",
   storageBucket: "ecowatch-c3a72.appspot.com",
   messagingSenderId: "361212644337",
   appId: "1:361212644337:web:a79a5546f7ed8edfb95250",
   measurementId: "G-WBY6W9Y0F7"
 };
+
+// Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
 import React, { useState } from "react";
@@ -46,7 +53,7 @@ export const SignUpScreen = ({ onCloseSignUp }) => {
             <label className="m-2 flex place-items-center flex-col text-2xl content-center text-emerald-600">
               Email
               <input
-                className="mt-2 rounded-lg bg-transparent border-2"
+                className="p-2 mt-2 rounded-lg bg-transparent border-2"
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
@@ -55,7 +62,7 @@ export const SignUpScreen = ({ onCloseSignUp }) => {
             <label className="my-6 flex place-items-center flex-col text-2xl content-center text-emerald-600">
               Password
               <input
-                className="mt-2 rounded-lg bg-transparent border-2"
+                className="p-2 mt-2 rounded-lg bg-transparent border-2"
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
