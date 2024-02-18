@@ -9,6 +9,15 @@ const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
 const db = getDatabase();
 
+export const getFeedPosts = async () => {
+    const postsRef = ref(db, 'posts/')
+    try {
+        return (await get(postsRef)).val()
+    } catch {
+        return []
+    }
+}
+
 export function AddUser(uuid, email) {
     set(ref(db, 'users/' + uuid), {
         email: email,
@@ -17,6 +26,15 @@ export function AddUser(uuid, email) {
             "Tecumseh, ON"
         ]
         });
+}
+
+export const getFeedPosts = async () => {
+    const postsRef = ref(db, 'posts/')
+    try {
+        return (await get(postsRef)).val()
+    } catch {
+        return []
+    }
 }
 
 export function JoinCommunity(uuid, community) {

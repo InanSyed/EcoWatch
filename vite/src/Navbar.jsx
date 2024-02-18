@@ -15,7 +15,7 @@ function Icon({ icon }) {
 export const Navbar = ({ setPage }) => {
     return (
         <nav className="flex flex-5 justify-around h-14 w-screen bg-blue">
-            <button onClick={() => setPage("empty")} className="">
+            <button onClick={() => setPage("feed")} className="">
                 <Icon icon={newspaperOutline} />
             </button>
             <button onClick={() => setPage("discover")} className="">
