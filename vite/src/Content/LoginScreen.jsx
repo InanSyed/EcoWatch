@@ -26,7 +26,7 @@ const analytics = getAnalytics(app);
 export const LoginScreen = ({ onToggleSignUp, setLoggedIn }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [logInError, setLogInError] = useState(false);
+  const [logInError, setLogInError] = useState(false);  
   const [logInErrorText, setLogInErrorText] = useState("");
 
 
@@ -44,6 +44,7 @@ export const LoginScreen = ({ onToggleSignUp, setLoggedIn }) => {
       console.error("Error logging in:", error.message);
     }
   };
+
 
   return (
     <div className="m-5 flex place-items-center flex-col">

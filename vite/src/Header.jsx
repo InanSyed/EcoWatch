@@ -31,7 +31,7 @@ export const Header = ({ changePage, loggedIn }) => {
                         !loggedIn && <button onClick={() => changePage("login")} className='place-self-center bg-green-950 font-bold text-center text-lg py-2 px-5 rounded-lg ring-2 ring-green-700'>Log In</button>
                     }
                     {
-                        loggedIn && <button onClick={() => changePage("empty")}><Icon icon={personCircleOutline} /></button>
+                        loggedIn && <button onClick={() => changePage("profile")}><Icon icon={personCircleOutline} /></button>
                     }
                 </div>
             </div>
