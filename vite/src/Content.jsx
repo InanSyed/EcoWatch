@@ -32,7 +32,7 @@ export const Content = ({ page, setPage, loggedIn, setLoggedIn }) => {
 
 
 
-    if (page == "landing") return <div className="flex-1 grow">
+    if (page == "landing") return <div className="flex-1 grow text-wrap">
         <LandingPage />
     </div>
 
