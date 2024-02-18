@@ -24,9 +24,9 @@ export const Navbar = ({ setPage }) => {
             <button onClick={() => setPage("homescreen")} className="">
                 <Icon icon={homeOutline} />
             </button>
-            <button onClick={() => setPage("empty")} className="">
+            {/* <button onClick={() => setPage("empty")} className="">
                 <Icon icon={calendarClearOutline} />
-            </button>
+            </button> */}
         </nav>
     )
 }
