@@ -1,12 +1,17 @@
 import React, { useState } from "react";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
-
+// Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
 
+// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
   apiKey: "AIzaSyBIToEBBXpngnJymATRKTx5BX7MdnvdXtk",
   authDomain: "ecowatch-c3a72.firebaseapp.com",
+  databaseURL: "https://ecowatch-c3a72-default-rtdb.firebaseio.com",
   projectId: "ecowatch-c3a72",
   storageBucket: "ecowatch-c3a72.appspot.com",
   messagingSenderId: "361212644337",
@@ -14,17 +19,20 @@ const firebaseConfig = {
   measurementId: "G-WBY6W9Y0F7"
 };
 
+// Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
 
 export const LoginScreen = ({ onToggleSignUp }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loggedin, setloggedin] = useState(false);
 
   const handleLogin = async () => {
     try {
       const auth = getAuth();
       await signInWithEmailAndPassword(auth, email, password);
+      setloggedin(true);
       console.log("User logged in successfully");
     } catch (error) {
       console.error("Error logging in:", error.message);
@@ -38,14 +46,14 @@ export const LoginScreen = ({ onToggleSignUp }) => {
         <label className="m-2 flex place-items-center flex-col text-2xl content-center text-emerald-600">
           Email
           <input
-            className="mt-2 rounded-lg bg-transparent border-2"
+            className="p-2 mt-2 rounded-lg bg-transparent border-2"
             type="email"
             defaultValue="example@domain.com"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
         </label>
-        <label className="my-6 flex place-items-center flex-col text-2xl content-center text-emerald-600">
+        <label className="p-2 my-6 flex place-items-center flex-col text-2xl content-center text-emerald-600">
           Password
           <input
             className="mt-2 rounded-lg bg-transparent border-2"

@@ -16,8 +16,11 @@ export const Navbar = () => {
     return (
         <nav className="flex flex-5 h-14 w-screen bg-blue">
             <Icon icon={newspaperOutline}/>
+            <Icon icon={search-outline}/>
             <Icon icon={homeOutline}/>
             <Icon icon={calendarClearOutline}/>
+            <Icon icon={walk-outline}/>
+
         </nav>
     )
 }
