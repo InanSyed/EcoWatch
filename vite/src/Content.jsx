@@ -6,6 +6,7 @@ import { HomeScreen } from "./Content/Challenges.jsx";
 import { DiscoverScreen } from "./Content/Discover.jsx";
 import { LandingPage } from "./Content/LandingPage.jsx";
 import { Profile } from "./Content/Profile.jsx";
+import { FeedScreen } from './content/Feed.jsx'
 import { getAuth } from "firebase/auth";
 
 export const Login = ({ setLoggedIn }) => {
