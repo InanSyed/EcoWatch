@@ -36,7 +36,7 @@ export const Content = ({ page, loggedIn, setLoggedIn }) => {
     </div>
 
     if (page == "empty") return <div className="flex-1 grow">
-        empty page
+        <FeedScreen loggedIn={loggedIn} />
     </div>
 
     if (page == "homescreen") return <div className="flex-1 grow">
