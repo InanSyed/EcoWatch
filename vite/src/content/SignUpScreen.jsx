@@ -1,18 +1,16 @@
-// Import the functions you need from the SDKs you need
-import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
+import React, { useState } from "react";
 
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+import { initializeApp } from "firebase/app";
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { getDatabase, ref, set } from "firebase/database";
+import { getAnalytics } from "firebase/analytics";
+
 import firebaseConfig from "../../firebase.config.json";
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
-import React, { useState } from "react";
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+const db = getDatabase();
 
 export const SignUpScreen = ({ onCloseSignUp }) => {
   const [email, setEmail] = useState("");
@@ -24,7 +22,15 @@ export const SignUpScreen = ({ onCloseSignUp }) => {
   const handleSignUp = async () => {
     try {
       const auth = getAuth();
-      await createUserWithEmailAndPassword(auth, email, password);
+      await createUserWithEmailAndPassword(auth, email, password)
+        .then((UserCredential) => {
+          set(ref(db, 'users/' + UserCredential.user.uid), {
+            email: email
+          });
+        })
+        .catch(() => {
+          console.log("OH MY GOD OH NO");
+        });
       console.log("User signed up successfully");
       setSignUpSuccess(true);
       onCloseSignUp(); // Close the SignUpScreen after successful signup
