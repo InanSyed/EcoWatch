@@ -74,13 +74,6 @@ export function CreateCommunity(name) {
         .catch((error) => {
             console.error(error);
         });
-
-export const getFeedPosts = async () => {
-    const postsRef = ref(db, 'posts/')
-    try {
-        return (await get(postsRef)).val()
-    } catch {
-        return []
     }
 
 export function JoinCommunity(uuid, community) {
@@ -99,4 +92,4 @@ export function JoinCommunity(uuid, community) {
         .catch((error) => {
             console.error(error);
         });
-}
+    }
