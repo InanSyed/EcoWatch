@@ -5,20 +5,14 @@ import { Navbar } from './Navbar.jsx'
 import { Content, Login } from './Content.jsx'
 
 const App = () => {
-  const [page, changePage] = useState("test");
+  const [page, changePage] = useState("landing");
   const [loggedin, setloggedin] = useState(false);
-
-  // const pages = {
-  //   "empty": <></>,
-  //   "login": <Login setLoggedIn={setloggedin} />,
-  //   "test": <h1>inan touches me</h1>
-  // }
 
   return (
     <div className="h-screen flex align-center flex-col">
       <Header changePage={changePage} loggedIn={loggedin} />
       <Content page={page} loggedIn={loggedin} setLoggedIn={setloggedin} />
-      <Navbar />
+      <Navbar setPage={changePage} />
     </div>
   );
 }

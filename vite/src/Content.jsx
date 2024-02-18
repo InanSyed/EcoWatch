@@ -2,6 +2,9 @@ import { useState } from "react";
 
 import { LoginScreen } from "./LoginScreen.jsx";
 import { SignUpScreen } from "./SignUpScreen.jsx";
+import { HomeScreen } from "./Challenges.jsx";
+import { DiscoverScreen } from "./Discover.jsx";
+import { LandingPage } from "./LandingPage.jsx";
 
 export const Login = ({ setLoggedIn }) => {
     const [showSignUp, setShowSignUp] = useState(false);
@@ -23,12 +26,24 @@ export const Login = ({ setLoggedIn }) => {
 
 
 export const Content = ({ page, loggedIn, setLoggedIn }) => {
-    if(!loggedIn) return <div className="flex-1 grow">
-            <Login setLoggedIn={setLoggedIn} />
-        </div>
+    if (page == "landing") return <div className="flex-1 grow">
+        <LandingPage />
+    </div>
 
-    if(page == "empty") return <div className="flex-1 grow">
+    if (page == "login") return <div className="flex-1 grow">
+        <Login setLoggedIn={setLoggedIn} />
+    </div>
+
+    if (page == "empty") return <div className="flex-1 grow">
         empty page
+    </div>
+
+    if (page == "homescreen") return <div className="flex-1 grow">
+        <HomeScreen loggedIn={loggedIn}/>
+    </div>
+
+    if (page == "discover") return <div className="flex-1 grow">
+        <DiscoverScreen loggedIn={loggedIn}/>
     </div>
 
     else return <div className="flex-1 grow">

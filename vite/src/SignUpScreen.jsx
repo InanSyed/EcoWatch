@@ -27,6 +27,8 @@ export const SignUpScreen = ({ onCloseSignUp }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [signUpSuccess, setSignUpSuccess] = useState(false);
+  const [signUpError, setSignUpError] = useState(false);
+  const [signUpErrorText, setSignUpErrorText] = useState("");
 
   const handleSignUp = async () => {
     try {
@@ -36,6 +38,8 @@ export const SignUpScreen = ({ onCloseSignUp }) => {
       setSignUpSuccess(true);
       onCloseSignUp(); // Close the SignUpScreen after successful signup
     } catch (error) {
+      setSignUpError(true);
+      setSignUpErrorText(error.message)
       console.error("Error signing up:", error.message);
     }
   };
@@ -76,6 +80,9 @@ export const SignUpScreen = ({ onCloseSignUp }) => {
               >
                 Sign Up
               </button>
+              {
+                signUpError && <p className="font-xl text-red-600">{signUpErrorText}</p>
+              }
               <span>
                 Already have an account?{" "}
                 <button type="button" onClick={onCloseSignUp}>
