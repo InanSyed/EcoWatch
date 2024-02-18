@@ -28,6 +28,53 @@ export function AddUser(uuid, email) {
         });
 }
 
+export const GetCommunities = async () => {
+    const communityRef = ref(db, "communities/");
+    
+    try {
+        return (await get(communityRef)).val()
+    } catch {
+        return []
+    }
+
+    // get(cRef)
+    //     .then((snapshot) => {O    if (snapshot.exists()) {
+    //             console.log(snapshot)
+    //             console.log(snapshot.val())
+    //             return snapshot.val();
+    //         } else {
+    //             return 'default value';
+    //         }
+    //     })
+    //     .catch((error) => {
+    //         console.error(error);
+    //     });
+    // return {};
+}
+
+export function CreateCommunity(name) {
+    const cRef = ref(db, "communities/");
+
+    get(cRef).
+        then((snapshot) => {
+            if (snapshot.exists()) {
+                const arr = snapshot.val();
+                arr.push({
+                    name: name,
+                    members: {}
+                });
+                set(snapshot.ref, arr)
+            } else {
+                set(snapshot.ref, [{
+                    name: name,
+                    members: {}
+                }]);
+            }
+        })
+        .catch((error) => {
+            console.error(error);
+        });
+
 export const getFeedPosts = async () => {
     const postsRef = ref(db, 'posts/')
     try {
@@ -35,20 +82,19 @@ export const getFeedPosts = async () => {
     } catch {
         return []
     }
-}
 
 export function JoinCommunity(uuid, community) {
     const userRef = ref(db, "users/" + uuid);
 
     get(child(userRef, "communities")).
         then((snapshot) => {
-        if (snapshot.exists()) {
-            const arr = snapshot.val();
-            arr.push(community);
-            set(snapshot.ref, arr)
-        } else {
-            console.log("No data available");
-        }
+            if (snapshot.exists()) {
+                const arr = snapshot.val();
+                arr.push(community);
+                set(snapshot.ref, [...new Set(arr)])
+            } else {
+                set(snapshot.ref, [community]);
+            }
         })
         .catch((error) => {
             console.error(error);
