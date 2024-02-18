@@ -8,7 +8,6 @@ import { LandingPage } from "./Content/LandingPage.jsx";
 import { Profile } from "./Content/Profile.jsx";
 import { getAuth } from "firebase/auth";
 
-
 export const Login = ({ setLoggedIn }) => {
     const [showSignUp, setShowSignUp] = useState(false);
 
@@ -45,11 +44,15 @@ export const Content = ({ page, setPage, loggedIn, setLoggedIn }) => {
     </div>
 
     if (page == "homescreen") return <div className="flex-1 grow">
-        <HomeScreen loggedIn={loggedIn}/>
+        <HomeScreen loggedIn={loggedIn} />
     </div>
 
     if (page == "discover") return <div className="flex-1 grow">
-        <DiscoverScreen loggedIn={loggedIn}/>
+        <DiscoverScreen loggedIn={loggedIn} />
+    </div>
+
+    if (page == "feed") return <div className="flex-1 grow">
+        <FeedScreen loggedIn={loggedIn} />
     </div>
 
     else return <div className="flex-1 grow">
