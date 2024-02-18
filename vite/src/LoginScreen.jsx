@@ -23,18 +23,24 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
 
-export const LoginScreen = ({ onToggleSignUp }) => {
+export const LoginScreen = ({ onToggleSignUp, setLoggedIn }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [loggedin, setloggedin] = useState(false);
+  const [logInError, setLogInError] = useState(false);
+  const [logInErrorText, setLogInErrorText] = useState("");
+
 
   const handleLogin = async () => {
     try {
       const auth = getAuth();
       await signInWithEmailAndPassword(auth, email, password);
-      setloggedin(true);
+      setLoggedIn(true);
+      setLogInError(false);
+      setLogInErrorText("");
       console.log("User logged in successfully");
     } catch (error) {
+      setLogInError(true);
+      setLogInErrorText(error.message)
       console.error("Error logging in:", error.message);
     }
   };
@@ -46,17 +52,16 @@ export const LoginScreen = ({ onToggleSignUp }) => {
         <label className="m-2 flex place-items-center flex-col text-2xl content-center text-emerald-600">
           Email
           <input
-            className="p-2 mt-2 rounded-lg bg-transparent border-2"
+            className="p-2 mt-2 rounded-lg bg-transparent border-2 "
             type="email"
-            defaultValue="example@domain.com"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
         </label>
-        <label className="p-2 my-6 flex place-items-center flex-col text-2xl content-center text-emerald-600">
+        <label className="my-6 flex place-items-center flex-col text-2xl content-center text-emerald-600">
           Password
           <input
-            className="mt-2 rounded-lg bg-transparent border-2"
+            className="p-2 mt-2 rounded-lg bg-transparent border-2"
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
@@ -70,6 +75,9 @@ export const LoginScreen = ({ onToggleSignUp }) => {
           >
             Login
           </button>
+          {
+            logInError && <p className="font-xl text-red-600">{logInErrorText}</p>
+          }
           <span>Don't have an account? <button type="button" onClick={onToggleSignUp}><u>Sign Up</u></button></span>
         </div>
       </form>
