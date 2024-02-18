@@ -11,7 +11,11 @@ const db = getDatabase();
 
 export const getFeedPosts = async () => {
     const postsRef = ref(db, 'posts/')
-    return (await get(postsRef)).val()
+    try {
+        return (await get(postsRef)).val()
+    } catch {
+        return []
+    }
 }
 
 export function AddUser(uuid, email) {
