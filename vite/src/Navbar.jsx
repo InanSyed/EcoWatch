@@ -18,11 +18,11 @@ export const Navbar = ({ setPage }) => {
             <button onClick={() => setPage("feed")} className="">
                 <Icon icon={newspaperOutline} />
             </button>
-            <button onClick={() => setPage("discover")} className="">
-                <Icon icon={searchOutline} />
-            </button>
             <button onClick={() => setPage("homescreen")} className="">
                 <Icon icon={homeOutline} />
+            </button>
+            <button onClick={() => setPage("discover")} className="">
+                <Icon icon={searchOutline} />
             </button>
             {/* <button onClick={() => setPage("empty")} className="">
                 <Icon icon={calendarClearOutline} />
