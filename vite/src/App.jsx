@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+// import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { Header } from './Header.jsx'
 import { Navbar } from './Navbar.jsx'
 import { Content, Login } from './Content.jsx'
