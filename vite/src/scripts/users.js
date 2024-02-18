@@ -19,6 +19,15 @@ export function AddUser(uuid, email) {
         });
 }
 
+export const getFeedPosts = async () => {
+    const postsRef = ref(db, 'posts/')
+    try {
+        return (await get(postsRef)).val()
+    } catch {
+        return []
+    }
+}
+
 export function JoinCommunity(uuid, community) {
     const userRef = ref(db, "users/" + uuid);
 
