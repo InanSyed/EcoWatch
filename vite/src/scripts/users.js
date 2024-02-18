@@ -12,17 +12,22 @@ const db = getDatabase();
 export function AddUser(uuid, email) {
     set(ref(db, 'users/' + uuid), {
         email: email,
-        communities: 0
+        communities: [
+            "Windsor, ON",
+            "Tecumseh, ON"
+        ]
         });
 }
 
 export function JoinCommunity(uuid, community) {
     const userRef = ref(db, "users/" + uuid);
 
-    get(child(userRef, community)).
+    get(child(userRef, "communities")).
         then((snapshot) => {
         if (snapshot.exists()) {
-            console.log(snapshot.val());
+            const arr = snapshot.val();
+            arr.push(community);
+            set(snapshot.ref, arr)
         } else {
             console.log("No data available");
         }
