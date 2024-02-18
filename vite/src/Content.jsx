@@ -1,11 +1,12 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
-import { LoginScreen } from "./content/LoginScreen.jsx";
-import { SignUpScreen } from "./content/SignUpScreen.jsx";
-import { HomeScreen } from "./content/Challenges.jsx";
-import { DiscoverScreen } from "./content/Discover.jsx";
-import { LandingPage } from "./content/LandingPage.jsx";
-import { FeedScreen } from "./content/Feed.jsx";
+import { LoginScreen } from "./Content/LoginScreen.jsx";
+import { SignUpScreen } from "./Content/SignUpScreen.jsx";
+import { HomeScreen } from "./Content/Challenges.jsx";
+import { DiscoverScreen } from "./Content/Discover.jsx";
+import { LandingPage } from "./Content/LandingPage.jsx";
+import { Profile } from "./Content/Profile.jsx";
+import { getAuth } from "firebase/auth";
 
 export const Login = ({ setLoggedIn }) => {
     const [showSignUp, setShowSignUp] = useState(false);
@@ -26,17 +27,20 @@ export const Login = ({ setLoggedIn }) => {
 }
 
 
-export const Content = ({ page, loggedIn, setLoggedIn }) => {
+export const Content = ({ page, setPage, loggedIn, setLoggedIn }) => {
+
+
+
     if (page == "landing") return <div className="flex-1 grow">
         <LandingPage />
     </div>
 
     if (page == "login") return <div className="flex-1 grow">
-        <Login setLoggedIn={setLoggedIn} />
+        <Login setLoggedIn={setLoggedIn} setPage={setPage} />
     </div>
 
-    if (page == "empty") return <div className="flex-1 grow">
-        <FeedScreen loggedIn={loggedIn} />
+    if (page == "profile") return <div className="flex-1 grow">
+        <Profile loggedIn={loggedIn} setPage={setPage} setLoggedIn={setLoggedIn} user={getAuth().currentUser}/>
     </div>
 
     if (page == "homescreen") return <div className="flex-1 grow">
