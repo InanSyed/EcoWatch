@@ -1,10 +1,10 @@
 import { useState } from "react";
 
-import { LoginScreen } from "./LoginScreen.jsx";
-import { SignUpScreen } from "./SignUpScreen.jsx";
-import { HomeScreen } from "./Challenges.jsx";
-import { DiscoverScreen } from "./Discover.jsx";
-import { LandingPage } from "./LandingPage.jsx";
+import { LoginScreen } from "./content/LoginScreen.jsx";
+import { SignUpScreen } from "./content/SignUpScreen.jsx";
+import { HomeScreen } from "./content/Challenges.jsx";
+import { DiscoverScreen } from "./content/Discover.jsx";
+import { LandingPage } from "./content/LandingPage.jsx";
 
 export const Login = ({ setLoggedIn }) => {
     const [showSignUp, setShowSignUp] = useState(false);

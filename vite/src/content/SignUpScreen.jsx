@@ -1,27 +1,18 @@
-// Import the functions you need from the SDKs you need
-import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
+import React, { useState } from "react";
 
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
-const firebaseConfig = {
-  apiKey: "AIzaSyBIToEBBXpngnJymATRKTx5BX7MdnvdXtk",
-  authDomain: "ecowatch-c3a72.firebaseapp.com",
-  databaseURL: "https://ecowatch-c3a72-default-rtdb.firebaseio.com",
-  projectId: "ecowatch-c3a72",
-  storageBucket: "ecowatch-c3a72.appspot.com",
-  messagingSenderId: "361212644337",
-  appId: "1:361212644337:web:a79a5546f7ed8edfb95250",
-  measurementId: "G-WBY6W9Y0F7"
-};
+import { initializeApp } from "firebase/app";
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { getDatabase, ref, set } from "firebase/database";
+import { getAnalytics } from "firebase/analytics";
+
+import { AddUser } from "../scripts/users.js"
+
+import firebaseConfig from "../../firebase.config.json";
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
-import React, { useState } from "react";
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+const db = getDatabase();
 
 export const SignUpScreen = ({ onCloseSignUp }) => {
   const [email, setEmail] = useState("");
@@ -33,7 +24,17 @@ export const SignUpScreen = ({ onCloseSignUp }) => {
   const handleSignUp = async () => {
     try {
       const auth = getAuth();
-      await createUserWithEmailAndPassword(auth, email, password);
+      await createUserWithEmailAndPassword(auth, email, password)
+        .then((UserCredential) => {
+          AddUser(UserCredential.user.uid, email);
+
+          // set(ref(db, 'users/' + UserCredential.user.uid + '/communities/'), {
+          //   0: "Windsor, ON"
+          // });
+        })
+        .catch(() => {
+          console.log("OH MY GOD OH NO");
+        });
       console.log("User signed up successfully");
       setSignUpSuccess(true);
       onCloseSignUp(); // Close the SignUpScreen after successful signup
