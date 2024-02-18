@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react";
 
-import { LoginScreen } from "./Content/LoginScreen.jsx";
+import { LoginScreen } from "./content/LoginScreen.jsx";
 import { SignUpScreen } from "./Content/SignUpScreen.jsx";
 import { HomeScreen } from "./Content/Challenges.jsx";
-import { DiscoverScreen } from "./Content/Discover.jsx";
+import { DiscoverScreen } from "./content/Discover.jsx";
 import { LandingPage } from "./Content/LandingPage.jsx";
-import { Profile } from "./Content/Profile.jsx";
+import { Profile } from "./content/Profile.jsx";
 import { FeedScreen } from './content/Feed.jsx'
 import { getAuth } from "firebase/auth";
 
