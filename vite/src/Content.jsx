@@ -5,6 +5,7 @@ import { SignUpScreen } from "./content/SignUpScreen.jsx";
 import { HomeScreen } from "./content/Challenges.jsx";
 import { DiscoverScreen } from "./content/Discover.jsx";
 import { LandingPage } from "./content/LandingPage.jsx";
+import { FeedScreen } from "./content/Feed.jsx";
 
 export const Login = ({ setLoggedIn }) => {
     const [showSignUp, setShowSignUp] = useState(false);
@@ -35,7 +36,7 @@ export const Content = ({ page, loggedIn, setLoggedIn }) => {
     </div>
 
     if (page == "empty") return <div className="flex-1 grow">
-        empty page
+        <FeedScreen loggedIn={loggedIn} />
     </div>
 
     if (page == "homescreen") return <div className="flex-1 grow">

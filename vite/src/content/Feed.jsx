@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import { getFeedPosts } from '../scripts/users'
 
 const testPosts = [
     {
@@ -39,15 +40,23 @@ export const PostCard = ({ data }) => {
 
 export const FeedScreen = ({ loggedIn }) => {
     const [selected, setSelected] = useState(null)
+    const [posts, setPosts] = useState([])
+
+    useEffect(() => {
+        const get = async () => {
+            if(!loggedIn) return
+            const posts = await getFeedPosts()
+            setPosts(posts)
+        }
+
+        get()
+    }, [loggedIn])
+    
+    if(!loggedIn) return <div>
+        <p className='grid m-32 place-content-center text-2xl text-red-600'>Please log in.</p>
+    </div>
 
     return (
-        <div>
-            {
-                loggedIn ? 
-                <div>
-                    {testPosts.map(el => <PostCard key={el.name} data={el} />)}
-                </div > : <p className='grid m-32 place-content-center text-2xl text-red-600'>Please log in.</p>
-            }
-        </div>
+        <div> {posts.map(p => <PostCard key={Math.random()} data={p} />)} </div>
     )
 }
