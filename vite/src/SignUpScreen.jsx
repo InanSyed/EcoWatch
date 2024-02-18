@@ -48,7 +48,6 @@ export const SignUpScreen = ({ onCloseSignUp }) => {
               <input
                 className="mt-2 rounded-lg bg-transparent border-2"
                 type="email"
-                defaultValue="example@domain.com"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />
