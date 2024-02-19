@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 // import { getAnalytics } from "firebase/analytics";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { getDatabase, ref, child, onValue } from "firebase/database";
+import { toggleCommunityMembership } from '../scripts/users';
 
 // const app = initializeApp(firebaseConfig);
 // const analytics = getAnalytics(app);
@@ -12,12 +13,11 @@ const db = getDatabase();
 
 // import firebaseConfig from "../../firebase.config.json";
 
-export const CommunityCard = ({ joined, name, data }) => {
-    const [joinStatus, setJoinStatus] = useState(false)
-    const [buttonText, setButtonText] = useState("Join");
+export const CommunityCard = ({ name, data, uuid, joined }) => {
 
     const handleJoin = () => {
-        // todo db logic
+        console.log("heee")
+        toggleCommunityMembership(uuid, name);
     }
 
     return (
@@ -46,7 +46,14 @@ export const DiscoverScreen = () => {
     const [joinedCommunities, setJoinedCommunities] = useState([])
     const [uuid, setUUID] = useState('')
 
+
+    // TODO RED ; to note that currently, auth is not revoked after reload
+    // this isn't necessarially a bad thing, but does not work alongside
+    // current functionality. in particular, the it still shows "login"
+    // instead of logout.
     useEffect(() => {
+        setLoggedIn(false)
+
         onAuthStateChanged(auth, (user) => {
             if (user) {
                 setLoggedIn(true)
@@ -103,7 +110,7 @@ export const DiscoverScreen = () => {
                     {
                         Object.keys(communities).map((key, _) => {
                             return <CommunityCard
-                                key={key} name={key}
+                                key={key} name={key} uuid={uuid}
                                 joined={joinedCommunities.includes(key)}
                                 data={communities[key]}
                                 />

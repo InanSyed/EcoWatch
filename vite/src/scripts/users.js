@@ -19,6 +19,50 @@ export const addUser = (uuid, email) => {
         });
 }
 
+export const joinCommunity = (uuid, community) => {
+    const userRef = ref(db, "users/" + uuid);
+    const userCommunitiesRef = child(userRef, "communities")
+
+    get(userCommunitiesRef)
+        .then((snap) => {
+            if (!snap.exists()) {
+                set(snap.ref, [community]);
+                return;
+            }
+
+            const c = snap.val();
+            c.push(community);
+            set(snap.ref, [...new Set(c)])
+        })
+        .catch((error) => {
+            console.error(error);
+        });
+    }
+
+export const toggleCommunityMembership = (uuid, community) => {
+    console.log(uuid, community)
+    get(
+        child(child(ref(db, "users/"), uuid), "communities")
+    ).then((snap) => {
+        console.log(snap.ref)
+        if (!snap.exists()) {
+            set(snap.ref, [community])
+            return;
+        }
+
+        if (!snap.val().includes(community)) {
+            set(snap.ref, [...new Set(snap.val()), community])
+            return;
+        }
+
+        const c = snap.val()
+        const sc = c.toSpliced(c.indexOf(community), 1);
+
+
+        set(snap.ref, [...new Set(sc)])
+    })
+}
+
 // todo remove
 export const getJoinedCommunities = async (uuid) => {
     const userRef = ref(db, "users/" + uuid);
@@ -31,22 +75,3 @@ export const getJoinedCommunities = async (uuid) => {
         return []
     }
 }
-
-export const joinCommunity = (uuid, community) => {
-    const userRef = ref(db, "users/" + uuid);
-    const userCommunitiesRef = child(userRef, "communities")
-
-    get(userCommunitiesRef)
-        .then((snap) => {
-            if (!snap.exists()) {
-                set(snap.ref, [community]);
-            }
-
-            const c = snap.val();
-            c.push(community);
-            set(snap.ref, [...new Set(c)])
-        })
-        .catch((error) => {
-            console.error(error);
-        });
-    }
