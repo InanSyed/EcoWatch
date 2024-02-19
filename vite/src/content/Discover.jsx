@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 
 import { initializeApp } from "firebase/app";
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
-import { getDatabase, child, ref, set } from "firebase/database";
+// import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { getDatabase } from "firebase/database";
 import { getAnalytics } from "firebase/analytics";
 
-import { GetCommunities, CreateCommunity } from '../scripts/users';
+import { getCommunities, createCommunity } from '../scripts/communities.js';
 
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
@@ -18,6 +18,11 @@ export const CommunityCard = ({ name, data }) => {
     const [joinStatus, setJoinStatus] = useState(false)
     const [buttonText, setButtonText] = useState("Join");
 
+    const handleJoin = () => {
+        setJoinStatus(!joinStatus);
+        setButtonText("Joined");
+    }
+
     return (
         // tailwind styled card
         <div className="p-4 m-4 bg-emerald-700 rounded-lg">
@@ -28,7 +33,7 @@ export const CommunityCard = ({ name, data }) => {
                         <h3 className="text-xl font-bold">{data.members} Members</h3>
                     </div>
                 </div>
-                <button onClick={() => { setJoinStatus(!joinStatus); setButtonText("Joined") }} className='bg-green-950 font-bold text-center text-lg py-2 px-5 rounded-lg border-2 border-green-700'>{buttonText}</button>
+                <button onClick={handleJoin} className='bg-green-950 font-bold text-center text-lg py-2 px-5 rounded-lg border-2 border-green-700'>{buttonText}</button>
             </div>
         </div>
     )
@@ -44,7 +49,7 @@ export const DiscoverScreen = ({ loggedIn }) => {
                 return;
             }
 
-            const c = await GetCommunities();
+            const c = await getCommunities();
             setCommunities(c);
         };
 

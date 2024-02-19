@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { getFeedPosts } from '../scripts/users'
+import { getFeedPosts } from '../scripts/feed.js'
 
 import ecoWatch from '../assets/EcoWatch LOGO.png'
 
