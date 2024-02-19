@@ -14,7 +14,7 @@ const db = getDatabase();
 import firebaseConfig from "../../firebase.config.json";
 
 
-export const CommunityCard = ({ data }) => {
+export const CommunityCard = ({ name, data }) => {
     const [joinStatus, setJoinStatus] = useState(false)
     const [buttonText, setButtonText] = useState("Join");
 
@@ -23,7 +23,7 @@ export const CommunityCard = ({ data }) => {
         <div className="p-4 m-4 bg-emerald-700 rounded-lg">
             <div className="flex justify-between">
                 <div className="flex flex-col">
-                    <h2 className="text-2xl font-bold">{data.name}</h2>
+                    <h2 className="text-2xl font-bold">{name}</h2>
                     <div className="flex justify-between">
                         <h3 className="text-xl font-bold">{data.members} Members</h3>
                     </div>
@@ -35,30 +35,21 @@ export const CommunityCard = ({ data }) => {
 }
 
 export const DiscoverScreen = ({ loggedIn }) => {
-    const [selected, setSelected] = useState(null)
+    // const [selected, setSelected] = useState(null)
     const [communities, setCommunities] = useState([])
     
-        // useEffect runs when [loggedIn] changes
-        useEffect(() => {
-            // create an async function inside, useEffect itself cant be async
-            const aget = async () => {
-                if(!loggedIn) return
-    
-                const com = await GetCommunities()
-                console.log(com)
-                setCommunities(com)
+    useEffect(() => {
+        const fetch = async () => {
+            if (!loggedIn) {
+                return;
             }
-    
-            aget()
-        }, [loggedIn])
 
-    // const communityCards = (communities) => {
-    //     const cards = []
-    //     for(const com of communities) {
-    //         cards.push(<CommunityCard key={com.name} data={com} />)
-    //     }
-    //     return cards
-    // }
+            const c = await GetCommunities();
+            setCommunities(c);
+        };
+
+        fetch();
+    })
 
     return (
         <div>
@@ -74,15 +65,12 @@ export const DiscoverScreen = ({ loggedIn }) => {
                         }}
                     />
                     {
-
-                            communities.map((data, key) => {
-                                return <CommunityCard 
-                                    data={data} 
+                        Object.keys(communities).map((key, _) => {
+                            return <CommunityCard
+                                key={key} name={key} 
+                                data={communities[key]}
                                 />
-                            })
-                        
-                        
-                    // communities.map(el => <CommunityCard key={el.name} data={el} />)
+                        })
                     }
                 </div > : <p className='grid m-32 place-content-center text-2xl text-red-600'>Please log in.</p>
             }
