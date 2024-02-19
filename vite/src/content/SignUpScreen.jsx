@@ -5,7 +5,7 @@ import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { getDatabase, ref, set } from "firebase/database";
 import { getAnalytics } from "firebase/analytics";
 
-import { AddUser } from "../scripts/users.js"
+import { addUser } from "../scripts/users.js"
 
 import firebaseConfig from "../../firebase.config.json";
 
@@ -26,7 +26,7 @@ export const SignUpScreen = ({ onCloseSignUp }) => {
       const auth = getAuth();
       await createUserWithEmailAndPassword(auth, email, password)
         .then((UserCredential) => {
-          AddUser(UserCredential.user.uid, email);
+          addUser(UserCredential.user.uid, email);
 
           // set(ref(db, 'users/' + UserCredential.user.uid + '/communities/'), {
           //   0: "Windsor, ON"

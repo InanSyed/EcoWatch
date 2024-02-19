@@ -10,7 +10,7 @@ import { getAnalytics } from "firebase/analytics";
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 import firebaseConfig from "../../firebase.config.json";
 
-import { JoinCommunity } from "../scripts/users";
+import { joinCommunity } from "../scripts/users";
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
@@ -28,7 +28,7 @@ export const LoginScreen = ({ onToggleSignUp, setLoggedIn }) => {
       const auth = getAuth();
       await signInWithEmailAndPassword(auth, email, password)
         .then((UserCredential) => {
-          JoinCommunity(UserCredential.user.uid, "Tecumseh, ON");
+          joinCommunity(UserCredential.user.uid, "Tecumseh, ON");
         });
       setLoggedIn(true);
       setLogInError(false);

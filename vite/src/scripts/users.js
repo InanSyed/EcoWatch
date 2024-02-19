@@ -9,16 +9,7 @@ const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
 const db = getDatabase();
 
-export const getFeedPosts = async () => {
-    const postsRef = ref(db, 'posts/')
-    try {
-        return (await get(postsRef)).val()
-    } catch {
-        return []
-    }
-}
-
-export function AddUser(uuid, email) {
+export function addUser(uuid, email) {
     set(ref(db, 'users/' + uuid), {
         email: email,
         communities: [
@@ -28,55 +19,7 @@ export function AddUser(uuid, email) {
         });
 }
 
-export const GetCommunities = async () => {
-    const communityRef = ref(db, "communities/");
-    
-    try {
-        return (await get(communityRef)).val()
-    } catch {
-        return []
-    }
-
-    // get(cRef)
-    //     .then((snapshot) => {O    if (snapshot.exists()) {
-    //             console.log(snapshot)
-    //             console.log(snapshot.val())
-    //             return snapshot.val();
-    //         } else {
-    //             return 'default value';
-    //         }
-    //     })
-    //     .catch((error) => {
-    //         console.error(error);
-    //     });
-    // return {};
-}
-
-export function CreateCommunity(name) {
-    const cRef = ref(db, "communities/");
-
-    get(cRef).
-        then((snapshot) => {
-            if (snapshot.exists()) {
-                const arr = snapshot.val();
-                arr.push({
-                    name: name,
-                    members: {}
-                });
-                set(snapshot.ref, arr)
-            } else {
-                set(snapshot.ref, [{
-                    name: name,
-                    members: {}
-                }]);
-            }
-        })
-        .catch((error) => {
-            console.error(error);
-        });
-    }
-
-export function JoinCommunity(uuid, community) {
+export function joinCommunity(uuid, community) {
     const userRef = ref(db, "users/" + uuid);
 
     get(child(userRef, "communities")).
