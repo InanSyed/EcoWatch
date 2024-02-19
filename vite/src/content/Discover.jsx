@@ -1,26 +1,23 @@
 import React, { useState, useEffect } from 'react';
 
-import { initializeApp } from "firebase/app";
-// import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
-import { getDatabase } from "firebase/database";
-import { getAnalytics } from "firebase/analytics";
+// import { initializeApp } from "firebase/app";
+// import { getAnalytics } from "firebase/analytics";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { getDatabase, ref, child, onValue } from "firebase/database";
 
-import { getCommunities, createCommunity } from '../scripts/communities.js';
-
-const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
+// const app = initializeApp(firebaseConfig);
+// const analytics = getAnalytics(app);
+const auth = getAuth();
 const db = getDatabase();
 
-import firebaseConfig from "../../firebase.config.json";
+// import firebaseConfig from "../../firebase.config.json";
 
-
-export const CommunityCard = ({ name, data }) => {
+export const CommunityCard = ({ joined, name, data }) => {
     const [joinStatus, setJoinStatus] = useState(false)
     const [buttonText, setButtonText] = useState("Join");
 
     const handleJoin = () => {
-        setJoinStatus(!joinStatus);
-        setButtonText("Joined");
+        // todo db logic
     }
 
     return (
@@ -33,28 +30,62 @@ export const CommunityCard = ({ name, data }) => {
                         <h3 className="text-xl font-bold">{data.members} Members</h3>
                     </div>
                 </div>
-                <button onClick={handleJoin} className='bg-green-950 font-bold text-center text-lg py-2 px-5 rounded-lg border-2 border-green-700'>{buttonText}</button>
+                <button onClick={handleJoin} 
+                    className='bg-green-950 font-bold text-center text-lg py-2 px-5 rounded-lg border-2 border-green-700'
+                    >
+                        {joined ? "Joined" : "Join"}
+                    </button>
             </div>
         </div>
     )
 }
 
-export const DiscoverScreen = ({ loggedIn }) => {
-    // const [selected, setSelected] = useState(null)
-    const [communities, setCommunities] = useState([])
-    
+export const DiscoverScreen = () => {
+    const [loggedIn, setLoggedIn] = useState(false)
+    const [communities, setCommunities] = useState({})
+    const [joinedCommunities, setJoinedCommunities] = useState([])
+    const [uuid, setUUID] = useState('')
+
     useEffect(() => {
-        const fetch = async () => {
-            if (!loggedIn) {
-                return;
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                setLoggedIn(true)
+                setUUID(user.uid)
+            } else {
+                setLoggedIn(false)
+                setUUID('')
             }
+          });
+    }, [])
 
-            const c = await getCommunities();
-            setCommunities(c);
-        };
+    useEffect(() => {
+        if (!loggedIn) {
+            return;
+        }
 
-        fetch();
-    })
+        onValue(
+            ref(db, 'communities/'),
+            (snap) => {
+                const fetch = async () => {
+                    setCommunities(snap.val());
+                }
+                
+                fetch();
+            }
+        )
+
+        onValue(
+            child(child(ref(db, 'users/'), uuid), 'communities'),
+            (snap) => {
+                const fetch = async () => {
+                    const jc = snap.val();
+                    setJoinedCommunities([...jc]);
+                }
+                
+                fetch();
+            }
+        )
+    }, [loggedIn])
 
     return (
         <div>
@@ -72,7 +103,8 @@ export const DiscoverScreen = ({ loggedIn }) => {
                     {
                         Object.keys(communities).map((key, _) => {
                             return <CommunityCard
-                                key={key} name={key} 
+                                key={key} name={key}
+                                joined={joinedCommunities.includes(key)}
                                 data={communities[key]}
                                 />
                         })
