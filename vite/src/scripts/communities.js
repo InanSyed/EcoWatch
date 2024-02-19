@@ -1,12 +1,12 @@
-import { initializeApp } from "firebase/app";
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
-import { getDatabase, child, ref, set, get } from "firebase/database";
-import { getAnalytics } from "firebase/analytics";
+// import { initializeApp } from "firebase/app";
+// import { getAnalytics } from "firebase/analytics";
+// import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { getDatabase, ref, set, get } from "firebase/database";
 
-import firebaseConfig from "../../firebase.config.json";
+// import firebaseConfig from "../../firebase.config.json";
 
-const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
+// const app = initializeApp(firebaseConfig);
+// const analytics = getAnalytics(app);
 const db = getDatabase();
 
 export const getCommunities = async () => {
@@ -15,25 +15,11 @@ export const getCommunities = async () => {
     try {
         return (await get(communityRef)).val()
     } catch {
-        return []
+        return {}
     }
-
-    // get(cRef)
-    //     .then((snapshot) => {O    if (snapshot.exists()) {
-    //             console.log(snapshot)
-    //             console.log(snapshot.val())
-    //             return snapshot.val();
-    //         } else {
-    //             return 'default value';
-    //         }
-    //     })
-    //     .catch((error) => {
-    //         console.error(error);
-    //     });
-    // return {};
 }
 
-export function createCommunity(name) {
+export const createCommunity = (name) => {
     const cRef = ref(db, "communities/");
 
     get(cRef).
