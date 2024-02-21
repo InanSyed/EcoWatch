@@ -16,7 +16,7 @@ import { joinCommunity } from "../scripts/users";
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
 
-export const LoginScreen = ({ onToggleSignUp, setLoggedIn }) => {
+export const LoginScreen = ({ onToggleSignUp, setLoggedIn, setPage }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [logInError, setLogInError] = useState(false);
@@ -33,6 +33,7 @@ export const LoginScreen = ({ onToggleSignUp, setLoggedIn }) => {
       setLoggedIn(true);
       setLogInError(false);
       setLogInErrorText("");
+      setPage("homescreen")
       console.log("User logged in successfully");
     } catch (error) {
       setLogInError(true);
