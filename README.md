@@ -4,3 +4,15 @@ EcoWatch is a social networking app with a focus on inspiring community oriented
 
 ## Setup
 
+To run the server, execute the following commands, starting at the EcoWatch directory.
+
+```bash
+# navigate to app directory
+cd vite
+
+# install dependencies
+npm i
+
+# start the server in development mode
+npm run dev
+```
