@@ -9,7 +9,7 @@ import { Profile } from "./content/Profile.jsx";
 import { FeedScreen } from './content/Feed.jsx'
 import { getAuth } from "firebase/auth";
 
-export const Login = ({ setLoggedIn }) => {
+export const Login = ({ setLoggedIn, setPage }) => {
     const [showSignUp, setShowSignUp] = useState(false);
 
     const handleToggleSignUp = () => {
@@ -21,7 +21,7 @@ export const Login = ({ setLoggedIn }) => {
             {showSignUp ? (
                 <SignUpScreen onCloseSignUp={handleToggleSignUp} />
             ) : (
-                <LoginScreen onToggleSignUp={handleToggleSignUp} setLoggedIn={setLoggedIn} />
+                <LoginScreen onToggleSignUp={handleToggleSignUp} setLoggedIn={setLoggedIn} setPage={setPage} />
             )}
         </>
     );
