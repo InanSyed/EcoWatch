@@ -163,6 +163,7 @@ export const FeedScreen = ({ loggedIn }) => {
                 formVis && <CreatePost setFormVis={setFormVis} posts={posts} setPosts={setPosts} />
             }
             <div> {posts.map((p) => <PostCard data={p} />)} </div>
+            <p className="text-center text-red-500 my-32">Wow you're at the bottom of the feed!</p>
         </div>
     )
 }
