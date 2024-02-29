@@ -19,7 +19,7 @@ function Icon({ icon }) {
 export const Header = ({ changePage, loggedIn }) => {
     return (
         <>
-            <div className='flex flex-5 bg-gray-800'>
+            <div className='sticky top-0 flex flex-5 bg-gray-800'>
                 <div className='flex-1 grow'>
                     <a onClick={() => changePage("landing")}>
                     <img className='aspect-auto max-h-20' src={ecoWatchNoTree}></img>

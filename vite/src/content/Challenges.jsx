@@ -1,24 +1,24 @@
 import React, { useState } from 'react'
 
 const testGoals = [
-    {
-        name: "Windsor, ON Community",
-        memberCount: 23102,
-        goals: [
-            {
-                name: "Plant a tree",
-                description: "Plant a tree in the community",
-                progress: 4,
-                target: 10
-            },
-            {
-                name: "Pick up trash",
-                description: "Pick up trash in the community",
-                progress: 68,
-                target: 100,
-            }
-        ]
-    },
+    // {
+    //     name: "Windsor, ON Community",
+    //     memberCount: 23102,
+    //     goals: [
+    //         {
+    //             name: "Plant a tree",
+    //             description: "Plant a tree in the community",
+    //             progress: 4,
+    //             target: 10
+    //         },
+    //         {
+    //             name: "Pick up trash",
+    //             description: "Pick up trash in the community",
+    //             progress: 68,
+    //             target: 100,
+    //         }
+    //     ]
+    // },
 ]
 
 export const AddChallengeForm = ({ setFormVis, goals, setGoals }) => {
@@ -131,18 +131,16 @@ export const ExpandedCard = ({ data }) => {
     )
 }
 
-export const HomeScreen = ( { loggedIn } ) => {
+export const HomeScreen = ({ loggedIn }) => {
     const [selected, setSelected] = useState(null)
 
-    let selectedEl
-    if (selected)
-        selectedEl = <ExpandedCard data={testGoals.find(el => el.name === selected)} />
-    else
-        selectedEl = testGoals.map(el => <CommunityCard key={el.name} data={el} />)
+    const selectedEl = testGoals.map(el => <CommunityCard key={el.name} data={el} />)
 
     return (
         <div>
-            {loggedIn ? selectedEl : <p className='grid m-32 place-content-center text-2xl text-red-600'>Please log in.</p>}
+            {loggedIn ?
+                (selectedEl.length > 0 ? selectedEl : <p className='grid m-32 place-content-center text-2xl text-red-600'>You aren't in any communities.</p>)
+                : <p className='grid m-32 place-content-center text-2xl text-red-600'>Please log in.</p>}
         </div>
     )
 }

@@ -9,9 +9,9 @@ const App = () => {
   const [loggedin, setloggedin] = useState(false);
 
   return (
-    <div className="h-screen flex align-center flex-col">
+    <div className="bg-gradient-to-t from-base to-base-light flex flex-col align-center h-screen">
       <Header changePage={changePage} loggedIn={loggedin} />
-      <Content page={page} setPage={changePage} loggedIn={loggedin} setLoggedIn={setloggedin} />
+      <Content classname="mb-auto" page={page} setPage={changePage} loggedIn={loggedin} setLoggedIn={setloggedin} />
       <Navbar setPage={changePage} />
     </div>
   );

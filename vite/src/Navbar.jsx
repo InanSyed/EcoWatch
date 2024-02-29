@@ -14,19 +14,21 @@ function Icon({ icon }) {
 
 export const Navbar = ({ setPage }) => {
     return (
-        <nav className="flex flex-5 justify-around h-14 w-screen bg-blue">
-            <button onClick={() => setPage("feed")} className="">
-                <Icon icon={newspaperOutline} />
-            </button>
-            <button onClick={() => setPage("homescreen")} className="">
-                <Icon icon={homeOutline} />
-            </button>
-            <button onClick={() => setPage("discover")} className="">
-                <Icon icon={searchOutline} />
-            </button>
-            {/* <button onClick={() => setPage("empty")} className="">
+        <nav className="sticky md:bottom-0 bottom-2 flex justify-center">
+            <div className="bg-base rounded-full md:rounded-none w-11/12 md:w-full flex justify-around">
+                <button onClick={() => setPage("feed")} className="">
+                    <Icon icon={newspaperOutline} />
+                </button>
+                <button onClick={() => setPage("homescreen")} className="">
+                    <Icon icon={homeOutline} />
+                </button>
+                <button onClick={() => setPage("discover")} className="">
+                    <Icon icon={searchOutline} />
+                </button>
+                {/* <button onClick={() => setPage("empty")} className="">
                 <Icon icon={calendarClearOutline} />
             </button> */}
+            </div>
         </nav>
     )
 }
